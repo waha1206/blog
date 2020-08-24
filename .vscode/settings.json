@@ -1,0 +1,41 @@
+{
+    "editor.fontSize": 14,
+    "editor.lineHeight": 18,
+    "terminal.integrated.fontSize": 12, // terminal 字體大小
+    "files.autoSave": "onFocusChange", // 是否自動儲存檔案
+    "editor.fontFamily": "Fira Code",
+    // 注意，win 用戶都要使用 "\\"
+    //"python.pythonPath": "C:\\Users\\twtru\\Anaconda3\\envs\\venv_temp\\python.exe", // 預設的 PYTHON 執行環境
+    "extensions.ignoreRecommendations": true, // 是否忽略顯示建議的套件
+    "files.encoding": "utf8", // 設定預設編碼
+    "files.trimTrailingWhitespace": true, // 儲存的時候，會幫你自動過濾多餘的空格
+    "files.autoGuessEncoding": false, // 是否自動猜測檔案的編碼
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
+    // "workbench.welcome.enabled": false, // 使否關閉 vscode 歡迎的顯示頁面
+    "workbench.startupEditor": "newUntitledFile",
+    "explorer.confirmDelete": false,
+    // "workbench.colorTheme": "One Dark Pro", // 需安裝 One Dark Pro
+    "workbench.iconTheme": "vscode-icons", // 需安裝 vscode-icons
+    // Workspace Settings
+    // virtual environments 中的 python 執行檔
+    "python.pythonPath": "D:\\Dropbox\\python\\home-python\\venv\\20200404-django\\Scripts\\python.exe",
+    // 可以設定你放全部的 venvs 環境的根目錄資料夾
+    "python.venvPath": "C:\\Users\\twtru\\OneDrive\\work\\venv",
+    "python.terminal.activateEnvironment": true, // 自動啟動環境
+    "python.linting.pylintEnabled": true, // 需要 pip install pylint
+    "python.linting.enabled": true, // 需要 pip install pylint
+    "python.autoComplete.extraPaths": [
+        // "D:\\Dropbox\\python-office\\python_venv\\profit_venv", // 設定你的 venv 的環境目錄資料夾，為了偵測一些 python library
+        //"D:\Dropbox\python-office\python_project\profit", // 目的是偵測自己自定義的 class
+    ],
+    "python.autoComplete.addBrackets": true,
+    "tailwindCSS.emmetCompletions": true,
+    "editor.mouseWheelZoom": true,
+    "html.format.indentInnerHtml": true, // 是否自動加上括號
+    "editor.formatOnSave": false,
+    "editor.insertSpaces": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}
