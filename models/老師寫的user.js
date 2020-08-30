@@ -1,16 +1,14 @@
 var mongoose = require('mongoose')
 
-// 連接數據庫
-mongoose.set('useCreateIndex', true)
-mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true, useUnifiedTopology: true });
+// 连接数据库
+mongoose.connect('mongodb://localhost/test', { useMongoClient: true })
 
 var Schema = mongoose.Schema
 
 var userSchema = new Schema({
     email: {
         type: String,
-        required: true, // 必須
-        unique: true // 唯一不重複
+        required: true
     },
     nickname: {
         type: String,
@@ -22,12 +20,12 @@ var userSchema = new Schema({
     },
     created_time: {
         type: Date,
-        // 這裡不要寫 Date.now() 因為會即刻調用
-        // 這裡直接給了一個方法: Date.now
-        // 當你去 new Model 的時候，如果你沒有傳遞 create_time , 則 mongoose 就會調用 date.now 這個方法去執行，讓他成為 default 的值
+        // 注意：这里不要写 Date.now() 因为会即刻调用
+        // 这里直接给了一个方法：Date.now
+        // 当你去 new Model 的时候，如果你没有传递 create_time ，则 mongoose 就会调用 default 指定的Date.now 方法，使用其返回值作为默认值
         default: Date.now
     },
-    last_modify_time: {
+    last_modified_time: {
         type: Date,
         default: Date.now
     },
@@ -49,15 +47,12 @@ var userSchema = new Schema({
     },
     status: {
         type: Number,
-        // 0 沒有權限限制
-        // 1 不可以評論
-        // 2 不可以登入
-        // 是否可以評論
-        // 是否可以登入使用
+        // 0 没有权限限制
+        // 1 不可以评论
+        // 2 不可以登录
         enum: [0, 1, 2],
         default: 0
     }
 })
-
 
 module.exports = mongoose.model('User', userSchema)

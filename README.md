@@ -241,3 +241,90 @@ app.use(router)
 
 ## 4.模型設計
 
+不同的集合，在mySql裡面稱為表單，不同的集合要放到 models 目錄中用 dbName.js 的方式保存起來
+
+```shell
+models- topic.js // 話題
+      - user.js // 使用者資料
+      - comment.js // 評論
+      -
+```
+
+
+
+## 5.在Express 獲取表單 POST 請求數據
+
+安裝：
+
+```shell
+npm install body-parser
+```
+
+配置：
+
+```javascript
+var express = require('express')
+// 引包
+var bodyParser = require('body-parser')
+
+var app = express()
+
+// 配置 body-parser
+// 只要加入這個配置，則在 req 請求對象上會多出來一個屬性: body --- req.body
+// 也就是說你就可以直接通過 req.body 來獲取表單 POST 請求數據了
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
+```
+
+
+
+## 6.使用mongoose
+
+使用文件出處：https://mongoosejs.com/docs/guide.html
+
+```javascript
+var mongoose = require('mongoose')
+var Schema = mongoose.Schema
+
+  var blogSchema = new Schema({
+    title:  String, // String is shorthand for {type: String}
+    author: String,
+    body:   String,
+    comments: [{ body: String, date: Date }],
+    date: { type: Date, default: Date.now },
+    hidden: Boolean,
+    meta: {
+      votes: Number,
+      favs:  Number
+    }
+  });
+```
+
+連接數據庫 mongoose
+
+文件出處：https://mongoosejs.com/
+
+```javascript
+var mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true, useUnifiedTopology: true });
+```
+
+連接數據庫會出現報錯 
+
+```
+DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead
+```
+
+使用下面搞定他，我也不懂為什麼
+
+```javascript
+//链接数据库
+mongoose.set('useCreateIndex', true) //加上这个
+mongoose.connect(db, { useNewUrlParser: true })
+```
+
