@@ -328,3 +328,66 @@ mongoose.set('useCreateIndex', true) //加上这个
 mongoose.connect(db, { useNewUrlParser: true })
 ```
 
+### 6.1 儲存資料與MD5
+
+MD5是一個編碼，我們通常會把密碼編碼後存入數據庫，這樣也可以避免當數據庫資料外洩時，被人使用
+
+文件出處：https://github.com/blueimp/JavaScript-MD5
+
+```shell
+npm install blueimp-md5
+```
+
+然後到程序中引入 ( router.js )
+
+```javascript
+var md5 = require('blueimp-md5')
+```
+
+避免被暴力破解，加密兩次，例如 12345 的密碼 md5 一次，他的值不會變
+
+```javascript
+body.password = md5(md5(body.password))
+```
+
+### 6.2 express-session 插件
+
+在 Express 這個框架中，默認不支持 Session 和 Cookie，但是我們可以用第三方插件來實現
+
+安裝：
+
+```shell
+npm install express-session
+```
+
+配置：
+
+```shell
+var session = require('express-session')
+```
+
+使用：
+
+```shell
+app.use(session({
+  // 配置加密字符串，他會在原有加密基礎上和這個字符串拼接起來去加密 -- 增加安全性
+  // 使用在 md5(md5(password))
+  secret: 'keyboard cat',
+  resave: false,
+  // 無論你是否使用 session 我都默認直接給你分配一把鑰匙
+  saveUninitialized: true
+}))
+```
+
+當我們把這個插件配置好之後，我們就可以通過 req.session 來發訪問和設置 Session成員了
+
+實際操作
+
+```javascript
+//    添加 Session 數據： req.session.foo = 'bar'
+//    訪問 Session 數據： req.session.foo
+```
+
+提示：默認 session 數據是存放在記憶體裡面的，一但 server 重啟後就會失去，真正的運作環境會把
+
+seasion 做持久性保存，這意謂者，要存放在資料庫 mongoDB 中

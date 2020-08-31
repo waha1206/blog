@@ -22,7 +22,7 @@
 
       后来有人想到了一种办法，来解决这个问题。
      -->
-        <form id="register_form" method="post" action="/register">
+        <form id="register_form">
             <div class="form-group">
                 <label for="email">EMAIL</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Email" autofocus>
@@ -44,6 +44,8 @@
     <script src="/node_modules/jquery/dist/jquery.js"></script>
     <script>
         $('#register_form').on('submit', function(e) {
+            // e.preventDefault() 方法，阻止元素發生默認的行為，例如，當點擊提交按鈕時
+            // 阻止對表單的提交
             e.preventDefault()
             var formData = $(this).serialize()
             console.log(formData)
@@ -60,11 +62,11 @@
                         // 服务端重定向针对异步请求无效
                         window.location.href = '/'
                     } else if (err_code === 1) {
-                        window.alert('邮箱已存在！')
+                        window.alert('EMAIL已存在！')
                     } else if (err_code === 2) {
-                        window.alert('昵称已存在！')
+                        window.alert('暱稱已存在！')
                     } else if (err_code === 500) {
-                        window.alert('服务器忙，请稍后重试！')
+                        window.alert('服務器異常 請稍後使用！')
                     }
                 }
             })

@@ -3,6 +3,7 @@
         float: left;
     }
 </style> -->
+
 <nav class="navbar navbar-default">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -43,22 +44,22 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
                 {{ if user }}
-                <a class="btn btn-default navbar-btn" href="/topics/new">发起</a>
+                <a class="btn btn-default navbar-btn" href="/topics/new">貼文</a>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img width="20" height="20" src="../public/img/avatar-max-img.png" alt=""> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-current-user">
-                            当前登录用户: {{ user.nickname }}
+                            當前登錄用戶: {{ user.nickname }}
                         </li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">个人主页</a></li>
-                        <li><a href="/settings/profile">设置</a></li>
-                        <li><a href="/logout">退出</a></li>
+                        <li><a href="#">個人首頁</a></li>
+                        <li><a href="/settings/profile">設置</a></li>
+                        <li><a href="/logout">登出</a></li>
                     </ul>
                 </li>
                 {{ else }}
-                <a class="btn btn-primary navbar-btn" href="/login">登录</a>
-                <a class="btn btn-success navbar-btn" href="/register">注册</a> {{ /if }}
+                <a class="btn btn-primary navbar-btn" href="/login">登錄</a>
+                <a class="btn btn-success navbar-btn" href="/register">註冊</a> {{ /if }}
             </ul>
         </div>
         <!-- /.navbar-collapse -->

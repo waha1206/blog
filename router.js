@@ -1,11 +1,16 @@
 var express = require('express')
 
+var md5 = require('blueimp-md5')
+
 var User = require('./models/user')
 
 var router = express.Router()
 
 router.get('/', function(req, res) {
-    res.render('index.html')
+    // console.log(req.session.user)
+    res.render('index.html', {
+        user: req.session.user
+    })
 })
 
 router.get('/login', function(req, res) {
@@ -34,18 +39,41 @@ router.post('/register', function(req, res) {
                 email: body.email
             },
             {
-                username: body.username
+                nickname: body.username
             }
         ]
     }, function(err, data) {
         if (err) {
-            return res.status(500).send('server Error')
+            return res.status(500).jason({
+                success: false,
+                message: '伺服器錯誤'
+            })
         }
         if (data) {
-            // 郵箱或是暱稱已經存在
-            return res.status(200).send('郵箱或是暱稱已經存在')
+            console.log(data)
+                // 郵箱或是暱稱已經存在
+            return res.status(200).json({
+                err_code: 1,
+                message: '郵箱或是暱稱已存在'
+            })
         }
-        res.status(200).send(JSON.stringify({ success: true, foo: 'bar' }))
+        // md5 加密兩次防止被破解
+        body.password = md5(md5(body.password))
+        new User(body).save(function(err, user) {
+            if (err) {
+                return res.status(500).jason({
+                    err_code: 500,
+                    message: '伺服器錯誤'
+                })
+            }
+            // 註冊成功，使用 session 紀錄用戶的登錄狀態
+            req.session.user = user
+                // express 提供了一個方法 json({ key:value }) 會直接發送一個 json 格式給 瀏覽器端
+            res.status(200).json({
+                err_code: 0,
+                message: 'ok'
+            })
+        })
     })
 })
 
