@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <script>
+        $(function() {
+            var xhr = new XMLHttpRequest()
+
+            xhr.onreadystatechange = function() {
+                // console.log(xhr.readyState) 會往上找全域，多花時間
+                console.log(this.readyState)
+                if (this.readyState !== 4) return
+                console.log(this.responseText)
+            }
+
+            xhr.open('GET', 'http://127.0.0.1:5000/')
+
+            xhr.send()
+
+
+
+        })
+
+
+        //
+    </script>
+</body>
+
+</html>

@@ -391,3 +391,42 @@ app.use(session({
 提示：默認 session 數據是存放在記憶體裡面的，一但 server 重啟後就會失去，真正的運作環境會把
 
 seasion 做持久性保存，這意謂者，要存放在資料庫 mongoDB 中
+
+
+
+## 7.目錄結構
+
+```
+.
+├ app.js               專案的入口文件
+├ controllers
+├ models               儲存使用 mongoose 設計的數據模型
+├ node_modules         第三方插件
+├ package.json         插件描述文件
+├ package.json         鎖定版本文件 (npm 5 之後才有)
+├ public               公共的靜態資源
+├ README.md            項目說明文檔
+├ routes               如果業務比較多，代碼量大，則需要把路由按照業務的分類儲存到 routes 此目錄中
+├ router.js            把所有的路由都放到這個文件
+└ views                分頁的管理目錄 ( *.html 放這邊)
+
+```
+
+## 8.程式設計步驟
+
+- 創建目錄結構
+- 整合靜態頁 - 模板頁 - 使用 art-template 模板引擎的高級語法 
+  * include
+  * block
+  * extend
+
+- 設計用戶登錄、退出、註冊 的路由
+- 用戶註冊
+  * 先處理好客戶端頁面的內容 ( 表單控件的 name、發送請求、收集表單數據、發起請求 )
+  * 服務端
+    - 獲取客戶端表單請求數據
+    - 操作數據庫
+      - 如果有錯，發送 500 告訴客戶端服務器錯了
+      - 其他的根據你的業務發送不同的響應數據 ( respone -- res.status( xxx ).json( { } ) )
+- 用戶登錄
+- 用戶退出

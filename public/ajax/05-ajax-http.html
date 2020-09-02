@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='../../node_modules/jquery/dist/jquery.js'>
+    </script>
+    <style>
+
+    </style>
+</head>
+
+
+<script>
+    var xhr = new XMLHttpRequest()
+
+    xhr.open('POST', 'http://127.0.0.1:5000/test') // 設置請求行
+
+    xhr.setRequestHeader('foo', 'Bar') // 設置一個請求頭
+
+    // 一但你的請求體是 urlencoded 格式的內容，一定要設置請求頭中 Content-Type
+    // 'application/x-www-form-urlencoded'
+    //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+
+    //xhr.send('key1=value1&key2=value2') // 以 url encode 模式
+
+
+
+    // 下面這個是 json 格式，有趣了
+
+    xhr.setRequestHeader('Content-Type', 'application/json')
+
+    xhr.send('{"leo":"hello"}')
+
+
+
+
+    xhr.onload = function() {
+        console.log(this.readyState)
+    }
+</script>
+</body>
+
+</html>

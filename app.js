@@ -41,6 +41,21 @@ app.use(session({
 // 把路由掛載到 app 中
 app.use(router)
 
+// 匹配一個處理 404 的中間件 --- 一定要放到最後面
+app.use(function(req, res) {
+    res.render('404.html')
+})
+
+// 配置全局錯誤處理的中間件 --- 必須要有四個參數
+app.use(function(err, req, res, next) {
+    //console.log('目前沒用到全局錯誤的部分，還是希望獨立返回錯誤的 message')
+    // res.status(500).send(err.message)
+    res.status(500).json({
+        err_code: 500,
+        message: err.message
+    })
+})
+
 app.listen(5000, function() {
     console.log(' server running ...')
 })

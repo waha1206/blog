@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='../../node_modules/jquery/dist/jquery.js'>
+    </script>
+    <style>
+
+    </style>
+</head>
+
+
+<script>
+    var xhr = new XMLHttpRequest()
+    console.log(xhr.readyState)
+        // 0 xhr 初始化 請求代理對象
+
+    xhr.open('GET', 'http://127.0.0.1:5000/test')
+    console.log(xhr.readyState)
+        // 1 open 方法已經調用，建立一個與服務器 特定 ( 80 5000 3000 ... 等) 端口的連接
+
+    xhr.send()
+
+    xhr.addEventListener('readystatechange', function() {
+        // if (this.readyState !== 4) return
+        //console.log(this.readyState)
+
+        switch (this.readyState) {
+            case 2:
+                console.log(this.readyState)
+                console.log(this.getAllResponseHeaders().split('\n'))
+                console.log(this.getResponseHeader('server'))
+                console.log(this.getResponseHeader('date'))
+                console.log(this.responseText) // 這時候拿不到
+                    // 2 已經接收到了響應文的響應頭
+                break
+            case 3:
+                // 3 正在下載響應文的響應體
+                // 在這裡處理響應體，不保險，有可能下載不完整
+                console.log(this.readyState)
+                console.log(this.responseText)
+                break
+            case 4:
+                // 4
+                // 一切 OK 可以放心的執行
+                console.log(this.readyState)
+                console.log(this.responseText)
+                break
+        }
+    })
+</script>
+</body>
+
+</html>
