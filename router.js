@@ -3,12 +3,14 @@ var express = require('express')
 var md5 = require('blueimp-md5')
 
 var User = require('./models/user')
+
 const session = require('express-session')
 
 var router = express.Router()
 
 router.get('/', function(req, res, next) {
     // console.log(req.session.user)
+    console.log(req.session.user)
     res.render('index.html', {
         user: req.session.user
     })
@@ -107,11 +109,28 @@ router.get('/logout', function(req, res, next) {
 
 router.get('/test', function(req, res, next) {
     console.log(req.body)
-    res.send('我是get的響應的文本內容')
+    User.find({}, function(err, user) {
+        if (err) {
+            return next(err)
+        }
+        res.json(user)
+    })
 })
 router.post('/test', function(req, res, next) {
     console.log(req.body)
-    res.send('我是post的響應的文本內容')
+
+    var body = req.body
+    console.log(body.nickname)
+    User.findOne({
+        nickname: body.nickname
+    }, function(err, user) {
+        if (err) {
+            return next(err)
+        }
+        console.log(user)
+            //res.setHeader() 返回什麼數值，就要設定相對的 Header
+        res.json(user)
+    })
 })
 
 

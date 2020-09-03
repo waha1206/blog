@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <script>
+        // 同步與異步 async and sync
+
+        var xhrAsync = new XMLHttpRequest()
+        var xhrSync = new XMLHttpRequest()
+
+        // 設定 同步與異步 true = 異步 false = 同步 (這個會造成阻塞)
+
+        xhrAsync.open('POST', 'http://127.0.0.1:5000/test')
+        xhrSync.open('POST', 'http://127.0.0.1:5000/test', false)
+
+        xhrAsync.setRequestHeader('Access-Control-Allow-Origin', 'origin-list')
+        xhrSync.setRequestHeader('Access-Control-Allow-Origin', 'origin-list')
+
+        console.time('async')
+        xhrAsync.send(null)
+        console.timeEnd('async')
+
+        console.time('sync')
+        xhrSync.send(null)
+        console.timeEnd('sync')
+    </script>
+</body>
+
+</html>

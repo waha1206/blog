@@ -8,7 +8,14 @@ var bodyParser = require('body-parser')
 
 var session = require('express-session')
 
+const MongoStore = require('connect-mongo')(session);
+
+
+
 router = require('./router')
+
+// 管理 admin
+admin = require('./routes/admin')
 
 app.use('/public/', express.static(path.join(__dirname + '/public/')))
 app.use('/node_modules/', express.static(path.join(__dirname + '/node_modules/')))
@@ -32,14 +39,19 @@ app.use(bodyParser.json())
 //    添加 Session 數據： req.session.foo = 'bar'
 //    訪問 Session 數據： req.session.foo
 
+
 app.use(session({
     secret: 'keyboard cat', // 配置加密字符串，他會在原有加密基礎上和這個字符串拼接起來去加密 -- 增加安全性
     resave: false,
-    saveUninitialized: true // 無論你是否使用 session 我都默認直接給你分配一把鑰匙
+    saveUninitialized: true, // 無論你是否使用 session 我都默認直接給你分配一把鑰匙
+    store: new MongoStore(options)
 }))
 
 // 把路由掛載到 app 中
 app.use(router)
+
+// 增加一個管理 admin 的 router
+app.use('/admin', admin)
 
 // 匹配一個處理 404 的中間件 --- 一定要放到最後面
 app.use(function(req, res) {

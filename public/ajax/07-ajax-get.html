@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='../../node_modules/jquery/dist/jquery.js'>
+    </script>
+    <style>
+
+    </style>
+</head>
+<ul>
+
+</ul>
+<script>
+    $(function() {
+        var xhr = new XMLHttpRequest()
+        var xhr2 = new XMLHttpRequest()
+
+
+        //xhr.open('POST', 'http://127.0.0.1:5000/test')
+
+        // 使用 GET 取得所有的 user
+        xhr.open('get', 'http://127.0.0.1:5000/test')
+
+        xhr.setRequestHeader('Content-Type', 'application/json')
+
+        //xhr.send('{"LEO":"帥哥"}')
+
+        // 無異議，除非是使用 POST ，目前傳到 /test 裡面使用 GET 拿到所有 USER 資料
+        xhr.send('{"nickname":"楊大大"}')
+
+        xhr.onload = function() {
+            if (xhr.readyState !== 4) return
+            var resObj = JSON.parse(this.responseText)
+                //console.log(resObj)
+            for (var i = 0; i < resObj.length; i++) {
+                console.log(resObj[i].nickname)
+                var $liObj = $('<li></li>').text(resObj[i].nickname)
+                    // 綁定點擊事件
+                $($liObj).on('click', function() {
+                    // 把 li 的 text() 值 包裝成 json 然後送到服務端
+                    var json = {
+                            nickname: $(this).text()
+                        }
+                        // 發送響應的端口
+                    xhr2.open('POST', 'http://127.0.0.1:5000/test')
+                        // 設定 發送的封包類型 -- 這邊使用 json
+                    xhr2.setRequestHeader('Content-Type', 'application/json')
+                        // 把 li 的 json 格式 的數值 轉換成字串送往服務端
+                    jsonStr = JSON.stringify(json)
+                    xhr2.send(jsonStr)
+                        // 等待 狀態 4
+                    xhr2.onload = function() {
+                        if (this.readyState !== 4) return
+                            // 收到服務端傳來的 字符串 在轉換成為 json 格式
+                        var resObj2 = JSON.parse(this.response)
+                            // 取得資料彈出來
+                        alert(resObj2.email)
+                    }
+                })
+                $('ul').append($liObj)
+            }
+        }
+    })
+</script>
+</body>
+
+</html>

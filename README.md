@@ -392,6 +392,34 @@ app.use(session({
 
 seasion 做持久性保存，這意謂者，要存放在資料庫 mongoDB 中
 
+### 6.3 session存在MongoDB
+
+使用插件：connect-mongo
+
+中文說明檔：https://segmentfault.com/a/1190000017383466
+
+文件出處：https://www.npmjs.com/package/connect-mongo
+
+```
+npm install connect-mongo
+```
+
+程式碼
+
+```shell
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+ 
+app.use(session({
+    secret: 'foo',
+    store: new MongoStore(options)
+}));
+```
+
+
+
+
+
 
 
 ## 7.目錄結構

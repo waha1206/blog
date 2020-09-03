@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <script>
+        var http = 'http://127.0.0.1:5000/test'
+
+        var xhr = new XMLHttpRequest()
+        xhr.open('GET', http, false)
+        xhr.onload = function() {
+            if (this.readyState !== 4) return
+                //這一行永遠執行不到，因為，同步已經結束了 XD
+            console.log(this.readyState)
+        }
+        xhr.send(null)
+            // 這邊會收到 xhr.status = 4
+            //console.log(xhr.readyState)
+
+        //註冊事件太晚
+        //xhr.onload = function() {
+        //    if (this.readyState !== 4) return
+        //        //這一行永遠執行不到，因為，同步已經結束了 XD
+        //    console.log(this.status)
+        //}
+    </script>
+</body>
+
+</html>

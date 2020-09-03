@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #555;
+            opacity: .5;
+            text-align: center;
+            line-height: 500px;
+            font-size: 48px;
+        }
+        
+        .loading::after {
+            content: '下載資料中 ...';
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loading"></div>
+    <table border="1 ">
+        <tr>
+            <td>暱稱</td>
+            <td>email</td>
+        </tr>
+        <tr>
+            <td><input type="text" id="nickname"></td>
+            <td><input type="text" id="email"></td>
+        </tr>
+        <tr>
+            <td><button id="btn">送出</button></td>
+            <td></td>
+        </tr>
+    </table>
+    <script>
+        $(function() {
+            $('#btn').on('click', function() {
+                $('.loading').show()
+                var nickname = $('#nickname').val()
+                var email = $('#email').val()
+
+                // 使用 json 傳遞的方式
+                // application/json
+                var jsonData = {
+                    nickname: nickname,
+                    email: email
+                }
+
+                var jsonDataStr = JSON.stringify(jsonData)
+                console.log('jsonDataStr', jsonDataStr)
+                var xhr = new XMLHttpRequest()
+                xhr.open('POST', 'http://127.0.0.1:5000/test')
+                    //xhr.setRequestHeader('Content-Type', 'application/json')
+                    //xhr.send(jsonDataStr)
+
+                // 另外一種寫法 --- 後面使用 x-www-form-urlencoded  此為瀏覽頁 url 傳遞的解析方式
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+                xhr.send(`nickname=${nickname}&email=${email}`)
+
+
+                xhr.onload = function() {
+
+                    if (this.readyState !== 4) return
+                    $('.loading').hide()
+                    console.log('收到資料了喔')
+                    console.log(this.responseText)
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
