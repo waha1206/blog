@@ -4,7 +4,7 @@ var md5 = require('blueimp-md5')
 
 var User = require('./models/user')
 
-const session = require('express-session')
+// const session = require('express-session')
 
 var router = express.Router()
 

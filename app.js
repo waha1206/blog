@@ -1,15 +1,13 @@
 var express = require('express')
-
 var path = require('path')
-
 var app = express()
-
 var bodyParser = require('body-parser')
-
 var session = require('express-session')
-
-const MongoStore = require('connect-mongo')(session);
-
+var mongoose = require('mongoose')
+const MongoStore = require('connect-mongo')(session)
+const {
+    PORT = 5000
+} = process.env
 
 
 router = require('./router')
@@ -42,9 +40,9 @@ app.use(bodyParser.json())
 
 app.use(session({
     secret: 'keyboard cat', // 配置加密字符串，他會在原有加密基礎上和這個字符串拼接起來去加密 -- 增加安全性
-    resave: false,
+    resave: true,
     saveUninitialized: true, // 無論你是否使用 session 我都默認直接給你分配一把鑰匙
-    store: new MongoStore(options)
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
 
 // 把路由掛載到 app 中
@@ -69,5 +67,5 @@ app.use(function(err, req, res, next) {
 })
 
 app.listen(5000, function() {
-    console.log(' server running ...')
+    console.log(`http://127.0.0.1:${PORT}`)
 })
