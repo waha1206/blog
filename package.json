@@ -23,6 +23,7 @@
     "mongoose": "^5.10.0",
     "nedb": "^1.8.0",
     "nedb-session-store": "^1.1.2",
-    "nprogress": "^0.2.0"
+    "nprogress": "^0.2.0",
+    "vue": "^2.6.12"
   }
 }

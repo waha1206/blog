@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 雙向數據綁定 -->
+        <input type='text' v-model='title'>
+        <p>{{title}}</p>
+
+    </div>
+    <script type="text/javascript">
+        $(function() {
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    title: 'Vue 入門'
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
