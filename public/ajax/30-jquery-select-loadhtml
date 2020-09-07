@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <script>
+        // href = http://127.0.0.1:500/admin
+        var url = $(this).attr('href')
+            // 把這個區域下面的 子元素 更新就好
+        $('#maim').load(url + ' #main > *')
+        return false
+    </script>
+</body>
+
+</html>

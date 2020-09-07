@@ -1,7 +1,40 @@
 {{extend '../_layouts/home.html'}} {{block 'title'}}{{'麥歐管理系統 - 使用者管理'}}{{/block}} {{block 'body'}}
 <h1>這邊是我要寫的內容</h1>
 
-<script>
-</script>
+<div id="mask" class="mask"></div>
+<div class="box">
+    <form action="/html/tags/html_form_tag_action.cfm" class="form-inline">
+        <label class="mr-sm-2 mb-0" for="first_name">First Name</label>
+        <input type="text" class="form-control mr-sm-2 mb-2 mb-sm-0" id="first_name" name="first_name">
+        <label class="mr-sm-2 mb-0" for="last_name">Last Name</label>
+        <input type="text" class="form-control mr-sm-2 mb-2 mb-sm-0" id="last_name" name="last_name">
+        <button type="submit" class="btn btn-primary mt-2 mt-sm-0">Submit</button>
+    </form>
+</div>
+<input type="button" value="遮罩層顯示" id="btnShowMask">
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>編號</th>
+            <th>暱稱</th>
+            <th>信箱</th>
+            <th>加入日期</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{each users}}
+        <tr>
+            <td>{{ $index }}</td>
+            <td>{{$value.nickname}}</td>
+            <td>{{$value.email}}</td>
+            <td>{{$value.created_time}}</td>
+            <td><a class="btn btn-success" href="/material/edit?id={{ $value.id }}">修改權限</a>
+                <a class="btn btn-success edit_user_data">修改用戶資料</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+
+</table>
+
 
 {{/block}}

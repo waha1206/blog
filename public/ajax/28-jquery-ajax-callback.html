@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <script>
+        $.ajax({
+            url: 'http://127.0.0.1:5000/admin/test',
+            // GET 接收使用 req.query  POST 接收使用 req.body
+            // 如果是 GET 請求，就透過 url 傳遞，需要安裝插件解析
+            // var bodyParser = require('body-parser') ，req.query
+            // 如果是 POST 請求，就透過請求體傳遞 req.body
+            type: 'POST',
+            data: {
+                id: 1,
+                name: '楊大大'
+            },
+            beforeSend: function(xhr) {
+                // 開始傳送之前，可以這邊先判斷拿到的資料是否正確
+                console.log(xhr)
+            },
+
+            // 用於 客戶端接收資料的響應體格式 跟上面的 type 沒有關係
+            dataType: 'json',
+            // 只有請求成功 (狀態碼為 200) 才會執行這個函數
+            success: function(res) {
+                // 一但設置了 dataType 選項，就不再關心服務端響應的 Content-Type 了
+                // 客戶端會主觀的認為返回的資料就是 JSON 格式的字符串，並且解析他
+                console.log(res)
+            },
+            error: function(xhr) {
+                // 只有請求不正常，狀態碼不為 2000 才會觸發
+                console.log(error, xhr)
+            },
+            complete: function() {
+                // 不管事請求成功還是失敗，都會執行這個 complete
+                console.log(complete, xhr)
+            }
+        })
+    </script>
+</body>
+
+</html>

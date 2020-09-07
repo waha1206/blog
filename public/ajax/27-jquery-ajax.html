@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <script>
+        // 最基礎的調用
+        //$.ajax('http://127.0.0.1:5000/admin/test', {
+        //    type: 'get', // method 請求方法
+        //    success: function(res) {
+        //        // res 拿到的只是響應體 responseText
+        //        console.log(res)
+        //    }
+        //})
+
+        $.ajax({
+            url: 'http://127.0.0.1:5000/admin/test',
+            // GET 接收使用 req.query  POST 接收使用 req.body
+            // 如果是 GET 請求，就透過 url 傳遞，需要安裝插件解析
+            // var bodyParser = require('body-parser') ，req.query
+            // 如果是 POST 請求，就透過請求體傳遞 req.body
+            type: 'POST',
+            data: {
+                id: 1,
+                name: '楊大大'
+            },
+            // 用於 客戶端接收資料的響應體格式 跟上面的 type 沒有關係
+            dataType: 'json',
+            success: function(res) {
+                // 一但設置了 dataType 選項，就不再關心服務端響應的 Content-Type 了
+                // 客戶端會主觀的認為返回的資料就是 JSON 格式的字符串，並且解析他
+                console.log(res)
+            }
+        })
+    </script>
+</body>
+
+</html>

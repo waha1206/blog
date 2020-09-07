@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+        .show {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+        
+        .view {
+            width: 300px;
+            height: 30px;
+            border: 1px solid gray;
+            line-height: 30px;
+            text-align: center;
+            margin: 20px auto;
+        }
+        
+        .active {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <p class="show" v-on:click="speak"></p>
+
+        <!-- 這邊看更多的事件 https://www.w3schools.com/jsref/dom_obj_event.asp -->
+        <!-- 1.事件綁定 -->
+        <p class="show" @mouseenter="mouseIn" @mouseleave="mouseLe"></p>
+
+        <!-- v-bind:src 可以簡化成為 :src -->
+        <!-- 2.屬性綁定 -->
+        <img src="a.jpg" alt="">
+        <img v-bind:src="imgName" alt="">
+        <img :src="imgName" alt="">
+
+        <!-- 樣式( class )綁定 v-bind:
+			當 isActive = true 時就給這個 div 的 class 屬性添加 active
+			當 isActive = false 時 時就給這個 div 的 class 屬性移除 active
+		-->
+        <div class="view" v-bind:class='{active:isActive}'>
+            {{message}}
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        $(function() {
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: 'Vue 的基礎課程',
+                    imgName: 'b.jpg',
+                    isActive: true
+                },
+                methods: {
+                    speak: function() {
+                        alert('hello')
+                    },
+                    mouseIn: function() {
+                        this.isActive = false
+                    },
+                    mouseLe: function() {
+                        this.isActive = true
+                    },
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+        .show {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 數據的渲染 -->
+        <p v-text='title'></p>
+        <p v-html='title'></p>
+        <!-- 模塊的隱藏 v-id v-show -->
+        <!-- v-if 不渲染 elements 裡面連看都看不到-->
+        <p class="show" v-if='isShow'></p>
+        <!-- v-show 渲染之後，再通過 display = none 隱藏起來 -->
+        <p class="show" v-show='isShow'></p>
+
+        <!-- v-for -->
+        <ul>
+            <li v-for='item in array'>{{ item }}</li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        $(function() {
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: 'hello Vue',
+                    title: '<h2>哈哈</h2>',
+                    hehe: '呵呵',
+                    isShow: false,
+                    array: ['1.HTML', '2.CSS', '3.Javascript']
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

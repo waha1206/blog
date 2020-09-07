@@ -5,12 +5,16 @@
     <meta charset="UTF-8">
     <title>{{block 'title'}}默認標題{{/block}}</title>
     <link rel="stylesheet" href="/public/css/bs3-css/bootstrap.min.css"> {{block 'head'}}{{/block}}
+    <link rel="stylesheet" href="/public/css/nprogress.css">
+    <link rel="stylesheet" href="/public/css/my-css.css">
 </head>
 
 <body>
     {{include '../_partials/header.html'}} {{block 'body'}}{{/block}} {{include '../_partials/footer.html'}}
     <script src="/node_modules/jquery/dist/jquery.js"></script>
     <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/public/js/nprogress.js"></script>
+    <script src="/public/js/my-js.js"></script>
     {{block 'script'}}{{/block}}
 </body>
 

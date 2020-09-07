@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <script>
+        var str = '楊乖乖'
+
+        $.get('http://127.0.0.1:5000/admin/test', {
+            id: 1
+        }, function(res) {
+            console.log(res)
+        })
+
+        $.post('http://127.0.0.1:5000/admin/test', {
+            id: 1,
+            name: '楊小小'
+        }, function(res) {
+            console.log(res)
+        })
+        $.getJSON('http://127.0.0.1:5000/admin/test', {
+            id: 1,
+            name: str
+        }, function(res) {
+            console.log(res)
+        })
+    </script>
+</body>
+
+</html>
