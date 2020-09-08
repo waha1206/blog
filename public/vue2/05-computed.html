@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+<div id="app">
+    {{getDate}}
+    <hr/>{{num}} 的平方是 {{getPow}}
+</div>
+
+<body>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                num: 99,
+                date: 1599568172800
+            },
+            computed: {
+                getDate() {
+                    let tt = new Date(this.date)
+                    let year = tt.getFullYear()
+                    let month = tt.getMonth() + 1
+                    let day = tt.getDay()
+                    return `${year}年${month}月${day}日`
+                },
+                getPow() {
+                    return Math.pow(this.num, 2)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

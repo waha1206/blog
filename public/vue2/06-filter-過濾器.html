@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{name}}</p>
+        <p>{{name | up}}</p>
+        <p>{{demo}}</p>
+        <p>{{demo | toLowerCase}}</p>
+        <input type="text" v-model='value'>
+
+        <p>{{gender | sex}}</p>
+        <p v-text='value'></p>
+    </div>
+
+    <script>
+        // 全局過濾器
+        Vue.filter('up', function(val) {
+            return val.toUpperCase()
+        })
+
+        new Vue({
+            el: '#app',
+            data: {
+                name: 'danger',
+                demo: 'ABCDE',
+                value: '',
+                gender: 0
+            },
+            // 區域過濾器
+            filters: {
+                toLowerCase(val) {
+                    return val.toLowerCase()
+                },
+                sex(val) {
+                    return val === 1 ? '男' : '女'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

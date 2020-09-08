@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1 v-if='ok'>OK數值為真</h1>
+        <h1 v-else>數值為其他類型</h1>
+
+        <h3>v-if-else 條件渲染</h3>
+        <p v-if='A == 0'>0</p>
+        <p v-else-if='A==1'>1</p>
+        <p v-else>2</p>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                ok: true,
+                A: ''
+            }
+        })
+    </script>
+</body>
+
+</html>

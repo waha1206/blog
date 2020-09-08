@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model.lazy='msg'>
+        <hr>
+        <p>{{msg}}</p>
+
+        <h3>文本域的雙向綁定</h3>
+        <textarea name="txtName" id="txtName" v-model='msg' cols="30" rows="10"></textarea> // 複選框
+        <h3>多選框</h3>
+        <input type="checkbox" v-model='backetball'>
+        <h3>多個多選框</h3>
+        {{msg}}<input type="checkbox" v-model='arr' value=1> 打電動
+        <input type="checkbox" v-model='arr' value=2> 睡覺
+        <input type="checkbox" v-model='arr' value=3> 吃飯
+        <input type="checkbox" v-model='arr' value=4>
+        <h3>單選按鈕</h3>
+        男<input type="radio" v-model='gender' value="男"> 女
+        <input type="radio" v-model='gender' value="女"> 其他
+        <input type="radio" v-model='gender' value="其他">
+        <hr> {{gender}}
+        <h3>多選框 -- 下拉選單</h3>
+        <select name="select" id="select" v-model='selectData'>
+			<option value="" disable>請選擇</option>
+			<option :value="msg">小物系列</option>
+			<option value="TD">提袋系列</option>
+			 <!-- 沒有 value 默認就是你這個的文字 -->
+			<option>緹花系列</option>
+		</select>
+        <hr> {{selectData}}
+
+        <h3>多選框 --- multiple </h3>
+        <select multiple v-model='muldata' style="width:100px">
+			<option :value="msg">小物系列</option>
+			<option value="TD">提袋系列</option>
+			 <!-- 沒有 value 默認就是你這個的文字 -->
+			<option>緹花系列</option>
+		</select>
+        <hr> {{selectData}}
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                msg: 'myoacg.com',
+                backetball: true,
+                arr: [],
+                gender: '男',
+                selectData: '',
+                muldata: []
+            }
+        })
+    </script>
+</body>
+
+</html>
