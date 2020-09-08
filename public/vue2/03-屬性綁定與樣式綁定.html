@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+        .red {
+            background-color: red;
+        }
+        
+        .yellow {
+            color: yellow;
+        }
+        
+        .bgc-blue {
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 綁定樣式 -->
+        <p v-text='message' :class='active'></p>
+
+        <!-- 綁定樣式，樣式再綁定要不要使用 再綁定的值要使用 { styleName:true or false } 去做集合 { red:isActive } -->
+        <p v-text='message' :class={red:isActive}></p>
+
+        <!-- 綁定多個樣式，大括符號外面要用 '' -->
+        <p v-text='message' :class='{red:isActive, yellow:true}'></p>
+
+        <!-- 使用 classObject 方式綁定 class -->
+        <p v-text='message' :class='classObject'></p>
+
+        <!-- 樣式類 綁定數組 -->
+        <p v-text='message' :class='[classA, classB]'></p>
+
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app ',
+            data: {
+                message: '這是一個訊息 ',
+                active: 'red ',
+                isActive: true,
+                // 樣式對象 classObject
+                classObject: {
+                    yellow: true,
+                    'bgc-blue': true
+                },
+                classA: 'yellow',
+                classB: 'bgc-blue'
+            }
+        })
+    </script>
+</body>
+
+</html>
