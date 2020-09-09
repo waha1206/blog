@@ -21,6 +21,16 @@
         <p v-if='A == 0'>0</p>
         <p v-else-if='A==1'>1</p>
         <p v-else>2</p>
+
+        <h3>template 模板</h3>
+        <template v-if='ok'>
+            <h1>title</h1>
+            <p>標題 1 </p>
+            <p>標題 2 </p>
+       </template>
+        <template v-else>
+           <h1>沒有數據</h1>
+       </template>
     </div>
     <script>
         var app = new Vue({
