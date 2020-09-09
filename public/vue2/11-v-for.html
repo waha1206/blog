@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <!--
+                更新 v-for 當內容異動的時候
+                例如 app.items = {name:'ll', age =09}
+                這個時候，頁面不會刷新顯示，資料已經被改，可以使用 app.$forceUpdate 強制刷新 或是
+                push() pop() shift() unshift() splice() sort() reverse()
+
+
+             -->
+            <!-- 遍歷數組 -->
+            <!-- 第一個位置為該 物件  第二個位置為 index 遍歷索引-->
+            <!-- :key 讓他綁定一個 key (不重複的意，可以增加處理效率) -->
+            <li v-for='(item, index) in items' v-if='item.age >20' :key='index'>{{ item.age }} -- {{ item.name }} -- {{ index }} </li>
+        </ul>
+
+        <ul>
+            <!-- 遍歷對象 -->
+            <li v-for='(value, key, index in User'> {{key}}:{{value}}--{{index}}</li>
+        </ul>
+
+        <h3>v-for 配合 template 輸出多個不同元素</h3>
+
+        <template v-for='(value, key, index in User'>
+            <div>
+                <h3>{{key}}</h3>
+                <p>{{value}}</p>
+                <p>{{index}}</p>
+            </div>
+        </template>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app ',
+            data: {
+                items: [{
+                    age: 20,
+                    name: 'leo '
+                }, {
+                    age: 46,
+                    name: 'waha '
+                }, {
+                    name: 'sate',
+                    age: 30
+                }],
+                User: {
+                    age: 22,
+                    name: 'Leo Yang',
+                    email: 'waha@gmail.com'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

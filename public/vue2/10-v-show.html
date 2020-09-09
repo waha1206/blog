@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p>v-show dom 結點存在，他是設定 display = none</p>
+        <h1 v-show='ok'>讓我顯示吧！</h1>
+
+        <p>v-if dom 結點不存在</p>
+        <h1 v-if='ok'>這個是 if 的 dom 節點</h1>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                ok: 1
+            }
+        })
+    </script>
+</body>
+
+</html>

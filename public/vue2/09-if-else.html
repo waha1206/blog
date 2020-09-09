@@ -30,14 +30,32 @@
        </template>
         <template v-else>
            <h1>沒有數據</h1>
-       </template>
+	   </template>
+
+        <h3>v-if優化處理-共用一個欄位</h3>
+        <template v-if='A===1'>
+			用戶名：<input type="text" placeholder="請數入帳號" v-model='name'>
+	   </template>
+        <template v-else>
+		   郵箱：<input type="text" placeholder="請輸入郵箱" v-model='password'>
+	   </template>
+        <hr>
+        <h3>v-if優化處理-不共用一個欄位</h3>
+        <template v-if='A===1'>
+			用戶名：<input type="text" placeholder="請數入帳號" key='c'>
+	   </template>
+        <template v-else>
+		   郵箱：<input type="text" placeholder="請輸入郵箱" key='d'>
+	   </template>
     </div>
     <script>
         var app = new Vue({
             el: '#app',
             data: {
                 ok: true,
-                A: ''
+                A: '',
+                name: '',
+                password: ''
             }
         })
     </script>
