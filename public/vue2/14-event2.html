@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p>綁定滑鼠右鍵的事件</p>
+        <p @click.right.stop.prevent='show(this)'>滑鼠右鍵觸發我</p>
+
+        <ul onclick='console.log(this)'>
+            <p>直接再行列式裡面找到 item >= 10</p>
+            <li @click.stop=show(item) v-for='(item, index) in items' v-if='item >= 10' :key='index'>{{ item }}</li>
+        </ul>
+        <ul>
+            <p>使用sort() 因為會有遞歸，所以需要先把資料複製一份再使用</p>
+            <li v-for='(item, index) in getSortedItem' v-if='item >= 10' :key='index'>{{ item }}</li>
+        </ul>
+        <ul>
+            <p>使用 filter 取得大於10的數字</p>
+            <li v-for='(item, index) in getLargeNums' v-if='item >= 10' :key='index'>{{ item }}</li>
+        </ul>
+        <ul onclick='console.log(this)'>
+            <p>a 停止跳轉到其他頁面，@click.prevent.stop=''</p>
+            <p>prevent = 不跳轉 href 所指定的頁面</p>
+            <p>stop 停止冒泡事件，會往父級冒泡，不會影響到兄弟</p>
+            <a @click.prevent.stop='' v-for='(item, index) in getLargeNums' v-if='item >= 10' :key='index' href="/">{{ item }}</li>
+		</ul>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                items: [1, 5, 2, 6, 7, 9, 23, 435, 23, 1, 66, 93]
+            },
+            methods: {
+                show(item) {
+                    console.log(item)
+                    console.log(this)
+                }
+            },
+            computed: { // 計算屬性，屬性當普通屬性來用
+                getSortedItem() {
+                    // 複製一份數組到新的 t 裡面
+                    let t = [...this.items]
+                        // 排序 sort 會影響到 原始數組，會產生遞歸，所以需要新數組
+                    return t.sort((a, b) => a - b)
+                },
+                getLargeNums() {
+                    // filter 不會影響到 原來的數組，所以可以使用
+                    return this.items.filter(item => item >= 10)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

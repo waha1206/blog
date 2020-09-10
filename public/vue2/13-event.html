@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1 v-on:click='age+=1; name=$event.target.innerHTML'>{{ age }}--{{name}}</h1>
+        <h1 v-on:click='add'>{{num}}</h1>
+        <hr>
+        <p v-for='(item, index) in items' :key='index' @click='showItem(item)'>{{index}}--{{item}}</p>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                age: 20,
+                num: 100000,
+                name: '',
+                items: [1, 5, 3, 7, 8, 9]
+            },
+            methods: {
+                add(e) {
+                    console.log('我是e')
+                    console.log(e.target);
+                    this.num += 1
+                        // 這裡的 e 是模擬 js 裡面的
+                },
+                showItem(item) {
+                    console.log(item)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

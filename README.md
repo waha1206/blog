@@ -447,7 +447,6 @@ app.use(session({
   * include
   * block
   * extend
-
 - 設計用戶登錄、退出、註冊 的路由
 - 用戶註冊
   * 先處理好客戶端頁面的內容 ( 表單控件的 name、發送請求、收集表單數據、發起請求 )
@@ -458,3 +457,64 @@ app.use(session({
       - 其他的根據你的業務發送不同的響應數據 ( respone -- res.status( xxx ).json( { } ) )
 - 用戶登錄
 - 用戶退出
+
+### 9.使用 csv-parse
+
+教學：https://youtu.be/9_x-UIVlxgo
+
+檔案：https://www.npmjs.com/package/csv-parse
+
+```javascript
+// 開啟 csv檔
+var fs = require('fs')
+var parse = require('csv-parse')
+var csvData = [];
+fs.createReadStream('C:/Users/User/Desktop/blog/public/file/customer.csv')
+    .pipe(parse({ delimiter: ',' }))
+    .on('data', function(csvrow) {
+        console.log(csvrow);
+        //do something with csvrow
+        csvData.push(csvrow);
+    })
+    .on('end', function() {
+        //do something with csvData
+        console.log(csvData);
+    });
+```
+
+### 9.1 改用 csvtojson
+
+安裝：
+
+```shell
+npm i --save csvtojson
+```
+
+使用
+
+```javascript
+const csvtojsonV2=require("csvtojson");
+const csvtojsonV2=require("csvtojson/v2");
+/** csv file
+a,b,c
+1,2,3
+4,5,6
+*/
+const csvFilePath='<path to csv file>'
+const csv=require('csvtojson')
+csv()
+.fromFile(csvFilePath)
+.then((jsonObj)=>{
+    console.log(jsonObj);
+    /**
+     * [
+     * 	{a:"1", b:"2", c:"3"},
+     * 	{a:"4", b:"5". c:"6"}
+     * ]
+     */ 
+})
+ 
+// Async / await usage
+const jsonArray=await csv().fromFile(csvFilePath);
+```
+

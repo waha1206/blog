@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/bulma/0.9.0/css/bulma.css">
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="點我增加數據" onclick="app.UserList.push({name:'waha', age:46, email:'waha1206@gamil.com', address:'新北市新店區寶興路'})">
+        <input type="button" value="aja讀取數據" @click="getUser">
+        <hr>
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <thead>
+                <tr>
+                    <td>no</td>
+                    <td>客戶名稱</td>
+                    <td>客戶類別</td>
+                    <td>客戶統編</td>
+                    <td>聯絡人姓名</td>
+                    <td>EMAIL</td>
+                    <td>聯絡人手機</td>
+                    <td>公司電話</td>
+                    <td>公司傳真</td>
+                    <td>公司地址</td>
+                </tr>
+            </thead>
+            <tbody>
+                <template v-if='UserList.length > 0'>
+                <tr v-for='(item, index) in UserList'>
+					<td>{{ index +1}}</td>
+					<td>{{ item.company}}</td>
+					<td>{{ item.customer_type}}</td>
+					<td>{{ item.tax_ID_number}}</td>
+					<td>{{ item.contact_person_name}}</td>
+					<td>{{ item.company_email}}</td>
+					<td>{{ item.contact_person_cell_phone}}</td>
+					<td>{{ item.company_telephone}}</td>
+					<td>{{ item.company_fax}}</td>
+					<td>{{ item.company_address}}</td>
+                </tr>
+                </template>
+                <template v-else>
+                <tr>
+                    <td colspan="4">沒有數據</td>
+                </tr>
+                </template>
+            </tbody>
+        </table>
+
+
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                UserList: []
+            },
+            methods: {
+                getUser(e) {
+                    $.get('http://127.0.0.1:5000/admin/test', {
+                        id: 1
+                    }, function(res) {
+                        console.log(res)
+                        app.UserList = res
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
