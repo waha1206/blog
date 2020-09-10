@@ -76,7 +76,7 @@ router.get('/admin/test', function(req, res, next) {
                     // res.setHeader('Access-Control-Allow-Credentials', true); // If needed
                     // send(data)
 
-                    console.log(jsonObj);
+                    console.log(jsonObj[0]);
                     res.send(jsonObj)
 
                     /**
