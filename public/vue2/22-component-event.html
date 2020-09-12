@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 綁定一個自訂事件為 my-event 指向到 處理函數 handleMyEvent -->
+        <my-com :num2='msg' v-on:my-event='handleMyEvent'></my-com>
+        <my-com :num2='msg' @my-event='handleMyEvent'></my-com>
+
+        <!-- 這個是 app 直接傳來的父組件裡的 data : num -->
+        {{ msg }}
+    </div>
+    <script>
+        Vue.component('my-com', {
+            template: `<div>
+				<p @click='emitEvent'>我是子組件</p>
+				<p>{{ num2 }}</p>
+			</div>`,
+            <!-- 定自子組件的屬性 -->
+            props: ['num2'],
+            methods: {
+                <!-- template 裡面的 @click 會觸發 emitEvent -->
+                emitEvent() {
+                    <!-- $emit() 會去觸發，放在裡面的 'my-event' 並且把後面的 1206 傳遞出去，1206也可以是函數 -->
+                    this.$emit('my-event', 1206)
+                    console.log('子組件的 click 觸發')
+                }
+            }
+        })
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                msg: 1
+            },
+            methods: {
+                handleMyEvent(e) {
+                    console.log('e 的值為：', e)
+                    this.msg = e * this.msg
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

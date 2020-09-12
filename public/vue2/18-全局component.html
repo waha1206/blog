@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <my-com v-for='(item, index) in 10' :key='index'>index={{ index }}, item={{ item }}</my-com>
+
+    </div>
+    <script>
+        // 註冊  全局定義組件
+        Vue.component('my-com', {
+            data: function() {
+                return {
+                    age: 20,
+                    name: 'myoacg.com'
+                }
+            },
+            template: `<div>
+				<p>{{name}}</p>
+				<p>{{age}}</p>
+				<slot></slot>
+				<slot></slot>
+				<hr>
+			</div>`
+        })
+
+        let app = new Vue({
+            el: '#app'
+        })
+    </script>
+</body>
+
+</html>

@@ -1,4 +1,21 @@
 {
+  "vetur.format.defaultFormatter.js": "vscode-typescript",
+  "vetur.format.defaultFormatter.html": "js-beautify-html",
+  "eslint.options": {
+    "extensions": [
+      ".js",
+      ".vue"
+    ]
+  },
+  // 保存自动修复
+  // jsx自动修复有问题，取消js的format
+  "editor.formatOnSave": false,
+  // Enable/disable default JavaScript formatter (For Prettier)
+  "javascript.format.enable": false,
+  "prettier.singleQuote": true,
+  // 点击保存时，根据 eslint 规则自定修复，同时集成 prettier 到 eslint 中
+  "prettier.eslintIntegration": true,
+// ---------------------------------------------------------------------------------
     "editor.fontSize": 14,
     "editor.lineHeight": 18,
     "terminal.integrated.fontSize": 12, // terminal 字體大小
@@ -32,10 +49,12 @@
     "tailwindCSS.emmetCompletions": true,
     "editor.mouseWheelZoom": true,
     "html.format.indentInnerHtml": true, // 是否自動加上括號
-    "editor.formatOnSave": false,
     "editor.insertSpaces": false,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "[javascript]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
     }
 }

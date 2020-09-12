@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p @click="componentName == 'kk'? componentName = 'ss' :componentName = 'kk'">切換當前的組件名字： {{componentName}}</p>
+        <!-- 如果要保留切換後的數值，請使用 keepalive -->
+        <keep-alive>
+            <component :is='componentName'></component>
+        </keep-alive>
+        <hr>
+        <mm></mm>
+    </div>
+    <script>
+        let mm = {
+                template: `
+				<div @click='set_a'>我是 mm</div>
+			`,
+                methods: {
+                    set_a() {
+                        console.log('我被電了')
+                    }
+                }
+            }
+            <!-- 使用 Vue.component 會變成全局的 -->
+        Vue.component('kk', {
+            template: `<div>KK： <input type='text'/></div>`
+        })
+
+        Vue.component('ss', {
+            template: `<div>ss： <input type='text'/></div>`
+        })
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                componentName: 'kk'
+            },
+            <!-- 使用 這裡的 components 會變成區域型的 -->
+            components: {
+                mm: mm
+            }
+
+        })
+    </script>
+</body>
+
+</html>

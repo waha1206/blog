@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <log-show log="應用啟動了" level="第一級"></log-show>
+        <log-show log="應用再度啟動了，請觀看 props 內容" level="第二級"></log-show>
+        <log-show :log="msg" level="第三級" a-b='好神奇，直接把AB轉換成為a-b'></log-show>
+        <kk-ll pp="9999" :a="7"></kk-ll>
+    </div>
+    <script>
+        // 這是一個局部組件 component
+        let LogShow = {
+            // 定是屬性名字AB，在上面的 HTML 裡面使用的時候，會被自動轉換成為 a-b ，所以就直接拿來用
+            // 在JS 的 結構中，還是使用駝峰吧
+            props: ['log', 'level', 'AB'],
+            template: `<p>{{level}}:{{log}}:{{AB}}</p>`
+        }
+
+        // 定義一個全局組件 全局組件的命名使用 xx-xx 因為外面有 '' 包起來，所以就直接寫吧
+        Vue.component('kk-ll', {
+            props: {
+                a: {
+                    required: true,
+                    type: Number,
+                    validator: function(val) {
+                        return val > 10
+                    }
+                },
+                b: {
+                    default: 20,
+                    type: Number
+                }
+
+            },
+            template: `<p>{{a}}--{{b}}</p>`
+        })
+
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                'msg': 'myoacg.com'
+            },
+            components: {
+                'log-show': LogShow
+            }
+        })
+    </script>
+</body>
+
+</html>

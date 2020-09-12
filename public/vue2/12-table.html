@@ -73,6 +73,14 @@
                         app.UserList = res
                     })
                 }
+            },
+            beforeCreate() {
+                $.get('http://127.0.0.1:5000/admin/test', {
+                    id: 1
+                }, function(res) {
+                    console.log(res)
+                    app.UserList = res
+                })
             }
         })
     </script>

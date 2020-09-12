@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <kk-ll>這裡是父組件預留給子組件的slot
+            <h1>我是H1 看看有沒有變大</h1>
+        </kk-ll>
+
+        <kk-ll></kk-ll>
+        <hr>
+        <aa></aa>
+        <hr>
+        <aa>
+            <!-- 具名插槽 在子容器裡面使用 solt = '插槽名字' 去替換內容
+                在 solt 中 以 name 讓他具備有被替換 內容的功能-->
+            <p slot='header'>嘿嘿嘿，我是從父組件裡面傳進來的</p>
+            <template slot='footer'>
+                <p>我是從父組件裡面的 template 進來的</p>
+                <h1>我也是從 template 過來的喲</h1>
+                <a href="#">偶也素從 template 過來的 a 元素 >///< </a>
+                <p>把 app data:下面的 name 綁定過來</p>
+                {{ name }}
+            </template>
+        </aa>
+        <hr>
+        <h3>
+            組件還可以進行崁套
+        </h3>
+        <kk-ll>
+            <aa></aa>
+        </kk-ll>
+    </div>
+    <script>
+        Vue.component('kk-ll', {
+            template: `<div>
+                <p>我是子組件的內容</p>
+                <slot>子組件的內容默認為 slot 的內容，父組件要是沒有傳入標籤或是組件，或是文字，你就會看到這個默認訊息</slot>
+            </div>`
+        })
+
+        Vue.component('aa', {
+            template: `<div>
+                <!-- 這個是 具名插槽 -->
+                <slot name='header'>我是 header slot 預設值</slot>
+                <hr/>
+                <slot name='footer'>我是 footer slot 預設值</slot>
+            </div>`
+        })
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                name: 'myoacg.com'
+            }
+        })
+    </script>
+</body>
+
+</html>

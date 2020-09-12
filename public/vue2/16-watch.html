@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ a }}</h1>
+        <h2>{{ b }}</h2>
+        <h3>{{ c }}</h3>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                a: 1,
+                b: 2,
+                c: 3
+            },
+            watch: {
+                a: function(newValue, oldValue) {
+                    console.log('a的值發生變化了%d', newValue)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

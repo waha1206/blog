@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <show v-for='(item, index) in 5' :key='index'></show>
+    </div>
+    <script>
+        let show_ext = {
+            template: `<h3>我是 show_ext 的template</h3>`
+        }
+
+        let show = {
+            data: function() {
+                return {
+                    age: 19,
+                    name: 'myoacg.com'
+                }
+            },
+            template: `<div>{{age}}-<show_ext_message></show_ext_message>-{{name}}</div>`,
+            components: {
+                show_ext_message: show_ext
+            }
+        }
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            components: {
+                show: show
+            }
+        })
+    </script>
+</body>
+
+</html>
