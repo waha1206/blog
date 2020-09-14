@@ -16,7 +16,8 @@
 <body>
     <div id="app">
         <input type="button" value="點我增加數據" onclick="app.UserList.push({name:'waha', age:46, email:'waha1206@gamil.com', address:'新北市新店區寶興路'})">
-        <input type="button" value="ajax讀取數據" @click="getUser">
+        <input type="button" value="ajax讀取數據-872個客戶資料" @click="getUser">
+        <input type="button" value="ajax讀取使用者資料" @click="getOldUser">
         <hr>
         <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
             <thead>
@@ -71,6 +72,13 @@
                     }, function(res) {
                         console.log(res)
                         app.UserList = res
+                    })
+                },
+                getOldUser(e) {
+                    $.get('http://127.0.0.1:5000/admin/test2', {
+                        id: 1
+                    }, function(res) {
+                        console.log(res)
                     })
                 }
             },

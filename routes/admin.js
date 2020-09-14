@@ -111,6 +111,25 @@ router.get('/admin/test', function(req, res, next) {
         })
 })
 
+router.get('/admin/test2', function(req, res, next) {
+    var user = req.session.user
+    User.find({},
+        function(err, data) {
+            if (err) {
+                return next(err)
+            }
+            console.log(req.query)
+            console.log(req.url)
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+            res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
+            res.setHeader('Access-Control-Allow-Credentials', true); // If needed
+            console.log(data)
+            res.send(data) //-- 舊的客戶資料
+            console.log('送出資料')
+        })
+})
+
 router.post('/admin/test', function(req, res, next) {
     var user = req.session.user
     User.find({},
@@ -119,15 +138,11 @@ router.post('/admin/test', function(req, res, next) {
                 return next(err)
             }
             console.log(req.body)
-
-
-
-
-            //console.log(data)
-            // res.render('./settings/user-authority.html', {
-            //     user: user,
-            //     users: data
-            // })
+                //console.log(data)
+                // res.render('./settings/user-authority.html', {
+                //     user: user,
+                //     users: data
+                // })
             res.send(data)
         })
 })
