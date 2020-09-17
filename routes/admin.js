@@ -113,6 +113,7 @@ router.get('/admin/test', function(req, res, next) {
 
 router.get('/admin/test2', function(req, res, next) {
     var user = req.session.user
+    console.log('A幹，我是GET耶')
     User.find({},
         function(err, data) {
             if (err) {
@@ -143,6 +144,37 @@ router.post('/admin/test', function(req, res, next) {
                 //     user: user,
                 //     users: data
                 // })
+            res.send(data)
+        })
+})
+
+router.delete('', function(req, res, next) {
+    var user = req.session.user
+    console.log(req.body)
+})
+
+router.post('/admin/test2', function(req, res, next) {
+    var user = req.session.user
+    console.log(req.body)
+    User.find({},
+        function(err, data) {
+            if (err) {
+                return next(err)
+            }
+
+            console.log('有跑到 delete 的 router 裡面', req.body)
+
+            //console.log(data)
+            // res.render('./settings/user-authority.html', {
+            //     user: user,
+            //     users: data
+            // })
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+            res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
+            res.setHeader('Access-Control-Allow-Credentials', true); // If needed
+            res.header("Access-Control-Expose-Headers", "*")
+            res.header("Access-Control-Allow-Headers", "Content-Type,Access-Token,adminid");
             res.send(data)
         })
 })

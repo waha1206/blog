@@ -60,6 +60,11 @@ app.use(function(req, res) {
 app.use(function(err, req, res, next) {
     //console.log('目前沒用到全局錯誤的部分，還是希望獨立返回錯誤的 message')
     // res.status(500).send(err.message)
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
+    res.setHeader('Access-Control-Allow-Credentials', true); // If needed
+    console.log(req.body)
     res.status(500).json({
         err_code: 500,
         message: err.message
