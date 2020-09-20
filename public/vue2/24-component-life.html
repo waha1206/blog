@@ -1,64 +1,64 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
-    <script src='../../node_modules/jquery/dist/jquery.js'></script>
-    <style>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+		<script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+		<script src='../../node_modules/jquery/dist/jquery.js'></script>
+		<style>
 
-    </style>
-</head>
+		</style>
+	</head>
 
-<body>
-    <div id="app">
-        <h1>父組件的生命週期</h1>
-        <kk></kk>
-    </div>
-    <script>
-        Vue.component('kk', {
-            template: `<div>子組件的生命週期</div>`,
-            beforeCreate() {
-                console.log('%c子組件:beforeCreat', 'color:blue;font-size:16px;')
-                this.$nextTick(function() {
-                    console.log('%c子組件:nextTick', 'color:blue;font-size:16px;')
-                })
-            },
-            created() {
-                console.log('%c子組件:created', 'color:blue;font-size:16px;')
-            },
-            beforeMount() {
-                console.log('%c子組件:beforeMount', 'color:blue;font-size:16px;')
-            },
-            mounted() {
-                console.log('%c子組件:mounted', 'color:blue;font-size:16px;')
-            }
-        })
+	<body>
+		<div id="app">
+			<h1>父組件的生命週期</h1>
+			<kk></kk>
+		</div>
+		<script>
+			Vue.component('kk', {
+				template: `<div>子組件的生命週期</div>`,
+				beforeCreate() {
+					console.log('%c子組件:beforeCreat', 'color:blue;font-size:16px;')
+					this.$nextTick(function () {
+						console.log('%c子組件:nextTick', 'color:blue;font-size:16px;')
+					})
+				},
+				created() {
+					console.log('%c子組件:created', 'color:blue;font-size:16px;')
+				},
+				beforeMount() {
+					console.log('%c子組件:beforeMount', 'color:blue;font-size:16px;')
+				},
+				mounted() {
+					console.log('%c子組件:mounted', 'color:blue;font-size:16px;')
+				}
+			})
 
-        var app = new Vue({
-            el: '#app',
-            data: {
-                num: 0
-            },
-            beforeCreate() {
-                console.log('%c根組件:beforeCreat', 'color:red;font-size:20px;', this.num)
-                this.$nextTick(function() {
-                    console.log('%c根組件:nextTick', 'color:red;font-size:20px;', this.num)
-                })
-            },
-            created() {
-                console.log('%c根組件:created', 'color:red;font-size:20px;', this.num)
-            },
-            beforeMount() {
-                console.log('%c根組件:beforeMount', 'color:red;font-size:20px;', this.num)
-            },
-            mounted() {
-                console.log('%c根組件:mounted', 'color:red;font-size:20px;', this.num)
-            }
-        })
-    </script>
-</body>
+			var app = new Vue({
+				el: '#app',
+				data: {
+					num: 0
+				},
+				beforeCreate() {
+					console.log('%c根組件:beforeCreat', 'color:red;font-size:20px;', this.num)
+					this.$nextTick(function () {
+						console.log('%c根組件:nextTick', 'color:red;font-size:20px;', this.num)
+					})
+				},
+				created() {
+					console.log('%c根組件:created', 'color:red;font-size:20px;', this.num)
+				},
+				beforeMount() {
+					console.log('%c根組件:beforeMount', 'color:red;font-size:20px;', this.num)
+				},
+				mounted() {
+					console.log('%c根組件:mounted', 'color:red;font-size:20px;', this.num)
+				}
+			})
+		</script>
+	</body>
 
 </html>
